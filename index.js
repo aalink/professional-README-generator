@@ -1,6 +1,7 @@
 // TODO: Include packages needed for this application
 const inquirer = require("inquirer");
 const fs = require("fs");
+const mdModule = require("./utils/generateMarkdown.js");
 // TODO: Create an array of questions for user input
 const questions = () => {
   return inquirer.prompt([
@@ -8,6 +9,46 @@ const questions = () => {
       type: "input",
       name: "title",
       message: "What is the title of the project?",
+    },
+    {
+      type: "list",
+      name: "license",
+      message: "What kind of license does it have?",
+      choices: [
+        "None",
+        "Apache 2.0 License",
+        "Boost Software License 1.0",
+        "BSD 3-Clause License",
+        "BSD 2-Clause License",
+        "CC0",
+        "Attribution 4.0 International",
+        "Attribution-ShareAlike 4.0 International",
+        "Attribution-NonCommercial 4.0 International",
+        "Attribution-NoDerivates 4.0 International",
+        "Attribution-NonCommmercial-ShareAlike 4.0 International",
+        "Attribution-NonCommercial-NoDerivatives 4.0 International",
+        "Eclipse Public License 1.0",
+        "GNU GPL v3",
+        "GNU GPL v2",
+        "GNU AGPL v3",
+        "GNU LGPL v3",
+        "GNU FDL v1.3",
+        "The Hippocratic License 2.1",
+        "The Hippocratic License 3.0",
+        "IBM Public License Version 1.0",
+        "ISC License (ISC)",
+        "The MIT License",
+        "Mozilla Public License 2.0",
+        "Attribution License (BY)",
+        "Open Database License (ODbL)",
+        "Public Domain Dedication and License (PDDL)",
+        "The Perl License",
+        "The Artistic License 2.0",
+        "SIL Open Font License 1.1",
+        "The Unlicense",
+        "The Do What the Fuck You Want to Public License",
+        "The zlib/libpng License",
+      ],
     },
     {
       type: "input",
@@ -23,48 +64,6 @@ const questions = () => {
       type: "input",
       name: "usage",
       message: "What is the usage of this project?",
-    },
-    {
-      type: "list",
-      name: "license",
-      message: "What kind of license does it have?",
-      choices: [
-        'None',
-        'Academic Free License v3.0',
-        'Apache license 2.0',
-        'Artistic license 2.0',
-        'Boost Software License 1.0',
-        'BSD 2-clause "Simplified" license',
-        'BSD 3-clause "New" or "Revised"',
-        'BSD 3-clause Clear license',
-        'Creative Commons license family',
-        'Creative Commons Zero v1.0 Universal',
-        'Creative Commons Attribution 4.0',
-        'Creative Commons Attribution Share Alike 4.0',
-        'Do What The F*ck You Want To Public License',
-        'Educational Community License v2.0',
-        'Eclipse Public License 1.0',
-        'Eclipse Public License 2.0',
-        'European Union Public License 1.1',
-        'GNU Affero General Public License v3.0',
-        'GNU General Public License family',
-        'GNU General Public License v2.0',
-        'GNU General Public License v3.0',
-        'GNU Lesser General Public License family',
-        'GNU Lesser General Public License v2.1',
-        'GNU Lesser General Public License v3.0',
-        'ISC',
-        'LaTeX Project Public License v1.3c',
-        'Microsoft Public License',
-        'MIT',
-        'Mozilla Public License 2.0',
-        'Open Software License 3.0',
-        'PostgreSQL License',
-        'SIL Open Font License 1.1',
-        'University of Illinois/NCSA Open Source License',
-        'The Unlicense',
-        'zLib License',
-      ]
     },
     {
       type: "input",
@@ -97,18 +96,24 @@ const questions = () => {
 // }
 
 // Generate the contents of the README.md file
-const generateREADME = ({ title, description, installation, usage, license, contribute, testing, github, email}) =>
+const generateREADME = ({ title, description, installation, usage, license, contribute, testing, github, email }) =>
   `
-# Title
-> ${title}
+# Title: ${title}
+${mdModule.renderLicenseSection(license)}
 ## Description
 > ${description}
+
+## Table of Contents
+
+- [Installation](#installation)
+- [Usage](#usage)
+- [Contribute](#contribute)
+- [Testing](#testing)
+
 ## Installation
 > ${installation}
 ## Usage
 > ${usage}
-## License
-> ${license}
 ## Contribute
 > ${contribute}
 ## Testing
@@ -117,13 +122,17 @@ const generateREADME = ({ title, description, installation, usage, license, cont
 If you have any questions or need to reach me, my GitHub is https://github.com/${github} and my email address is ${email}
 `;
 
-
 // #######################################################################################
 // #######################################################################################
 // #######################################################################################
 // TODO: Create a function to initialize app
 function init() {
-  questions();
+  questions()
+    .then((answers) =>
+      fs.writeFileSync("testREADME.md", generateREADME(answers))
+    )
+    .then(() => console.log("Successfully wrote to index.html"))
+    .catch((err) => console.error(err));
 }
 
 // Function call to initialize app
