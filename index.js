@@ -90,11 +90,33 @@ const questions = () => {
 };
 
 // TODO: Create a function to write README file
-function writeToFile(fileName, data) {
-    fs.writeFile(fileName, data, (err) => {
-        console.log("Write complete", err)
-    } )
-}
+// function writeToFile(fileName, data) {
+//     fs.writeFile(fileName, data, (err) => {
+//         console.log("Write complete", err)
+//     } )
+// }
+
+// Generate the contents of the README.md file
+const generateREADME = ({ title, description, installation, usage, license, contribute, testing, github, email}) =>
+  `
+# Title
+> ${title}
+## Description
+> ${description}
+## Installation
+> ${installation}
+## Usage
+> ${usage}
+## License
+> ${license}
+## Contribute
+> ${contribute}
+## Testing
+> ${testing}
+## Questions
+If you have any questions or need to reach me, my GitHub is https://github.com/${github} and my email address is ${email}
+`;
+
 
 // #######################################################################################
 // #######################################################################################
@@ -106,5 +128,3 @@ function init() {
 
 // Function call to initialize app
 init();
-
-
