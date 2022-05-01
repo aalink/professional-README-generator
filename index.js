@@ -119,7 +119,11 @@ ${mdModule.renderLicenseSection(license)}
 ## Testing
 > ${testing}
 ## Questions
-If you have any questions or need to reach me, my GitHub is https://github.com/${github} and my email address is ${email}
+If you have any questions or need to reach me:
+
+GitHub: https://github.com/${github}
+
+Email: ${email}
 `;
 
 // #######################################################################################
@@ -129,7 +133,7 @@ If you have any questions or need to reach me, my GitHub is https://github.com/$
 function init() {
   questions()
     .then((answers) =>
-      fs.writeFileSync("testREADME.md", generateREADME(answers))
+      fs.writeFileSync("create-README.md", generateREADME(answers))
     )
     .then(() => console.log("Successfully wrote to index.html"))
     .catch((err) => console.error(err));
