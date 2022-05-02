@@ -101,23 +101,23 @@ const generateREADME = ({ title, description, installation, usage, license, cont
 # Title: ${title}
 ${mdModule.renderLicenseSection(license)}
 ## Description
-> ${description}
+${description}
 
 ## Table of Contents
 
 - [Installation](#installation)
 - [Usage](#usage)
-- [Contribute](#contribute)
-- [Testing](#testing)
+- [Contributing](#contributing)
+- [Tests](#tests)
 
 ## Installation
-> ${installation}
+${installation}
 ## Usage
-> ${usage}
-## Contribute
-> ${contribute}
-## Testing
-> ${testing}
+${usage}
+## Contributing
+${contribute}
+## Tests
+${testing}
 ## Questions
 If you have any questions or need to reach me:
 
@@ -135,7 +135,7 @@ function init() {
     .then((answers) =>
       fs.writeFileSync("create-README.md", generateREADME(answers))
     )
-    .then(() => console.log("Successfully wrote to index.html"))
+    .then(() => console.log("Successfully created file."))
     .catch((err) => console.error(err));
 }
 
