@@ -1,12 +1,4 @@
-# professional-README-generator
-
-
-Repository Link: https://github.com/aalink/professional-README-generator
-
-
-
-
-# Title: Professional README.md Generator
+# Professional README.md Generator
 
   ## License
   [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
@@ -16,7 +8,11 @@ Repository Link: https://github.com/aalink/professional-README-generator
 ## Description
 A command-line application that dynamically generates a professional README.md file from a user's input using the Inquirer package.
 
+Repository Link: https://github.com/aalink/professional-README-generator
+
 A video demonstration can be viewed at the following link: https://drive.google.com/file/d/1EuHY_YRExDju9ORhhxLk1QxFoyJH9Ayp/view
+
+![VS Code Screen Shot](/assets/readme-screen-shot.png)
 
 ## Table of Contents
 
