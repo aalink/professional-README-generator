@@ -130,10 +130,11 @@ Email: ${email}
 // #######################################################################################
 // #######################################################################################
 // TODO: Create a function to initialize app
+// I'm using the name "example-README.md" on line 137 so that it doesn't replace the README.md I made specifically for this project.
 function init() {
   questions()
     .then((answers) =>
-      fs.writeFileSync("create-README.md", generateREADME(answers))
+      fs.writeFileSync("example-README.md", generateREADME(answers))
     )
     .then(() => console.log("Successfully created file."))
     .catch((err) => console.error(err));
